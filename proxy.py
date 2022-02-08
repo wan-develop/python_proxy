@@ -31,7 +31,9 @@ class Proxy2Server(Thread):
                 except Exception as e:
                     print(f'server[{self.port}]',e)
                 # forward to client
-                self.game.sendall(data) 
+                self.game.sendall(data)
+                
+                
              
                 
     def send_data(self,data):
@@ -102,14 +104,18 @@ class Proxy(Thread):
             self.p2s.start()
 
 
-ip = argv[1]
+PROXY_IP = argv[1]
+
+PROXY_PORT = argv[2]
+
+# argv 3 == "--target"
+
+SERVER_IP = argv[4]
+
+SERVER_PORT = argv[5]
 
 
-proxy_port = 7778
-
-server_port = 7777
-
-proxy = Proxy("192.168.1.102",ip, proxy_port,server_port)
+proxy = Proxy(PROXY_IP,SERVER_IP, PROXY_PORT,SERVER_PORT)
 
 proxy.run()
 
@@ -154,6 +160,4 @@ while True:
             
     except Exception as e:
         print(e)
-	
-		
-	
+        
